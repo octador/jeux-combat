@@ -3,7 +3,7 @@ require_once('./Config/autoload.php');
 
 class Hero
 {
-    //  definir le proprieter du heros
+    //  proprieter du heros
     private $id;
     private string $name;
     private int $lifePoints;

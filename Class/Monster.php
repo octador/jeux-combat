@@ -1,4 +1,5 @@
 <?php
+require_once('./Config/db.php');
 require_once('./Config/autoload.php');
 
 class Monster{

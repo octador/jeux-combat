@@ -1,4 +1,5 @@
 <?php
+require_once('./Config/db.php');
 require_once('./Config/autoload.php');
 
 class FighttsManager{
@@ -10,7 +11,7 @@ private object $monsterFigth;
 public function __construct($herosFigth,$monsterFigth)
 {
     $this->herosFigth = $herosFigth;
-    $this->$monsterFigth = $monsterFigth;
+    $this->monsterFigth = $monsterFigth;
 }
 
 

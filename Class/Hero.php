@@ -38,9 +38,10 @@ class Hero
     public function getlifepoints():string{
         return $this->lifePoints;
     }
-    public function hitHeros(){
-        // 1: recupere un les points de vie de HitMonster
-        // 2: enlever un nombre de pont alléatoire
+    // public function hitHeros($name){
+    //     // 1: recupere  les points de vie de HitMonster
+    //     // 2: enlever un nombre de pont alléatoire
+    //     $newmonster->getName();
     
-    }
+    // }
 }

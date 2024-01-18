@@ -6,6 +6,7 @@ class HeroesManager
 {
     private PDO $db;
     private array $herosObjectArray = [];
+    
 
     public function __construct($db)
     {
@@ -48,8 +49,9 @@ class HeroesManager
 
     // afficher tout les heros qui son en vie
     public function findAllAlive(){
-        $request = $this->db->query("SELECT * FROM heros WHERE heros.life_points > 0 ");
-        $result = $request->fetchAll();
-        return $result;
+
+        $request = $this->db->query("SELECT * FROM heros WHERE heros.life_points > 0 ORDER BY life_points DESC");
+        $results = $request->fetchAll();
+     return $results;
     }
 }

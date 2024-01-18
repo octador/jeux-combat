@@ -5,16 +5,19 @@ require_once('./Config/db.php');
 
 
 if (isset($_POST) && !empty($_POST)) {
-    // var_dump($_GET);
+    
     $newPerso = $_POST['name'];
+
     $newHeros = new HeroesManager($db);
-    //  chercher si dans la base de donnée si le name existe
-    $newHeros->checkHeros($newPerso);
+    $hero = new Hero(['heros' => $newPerso]);
+    
+    $newHeros->checkHeros($hero);
 
-    // $newheros = new Hero($id,$newPerso, $lifePoint);
-    // var_dump($newheros);
+    $newmonster = new Monster('Big King');
+//    echo $newmonster->getpointLifeMonster();
+   var_dump($newHeros->findAllAlive()) ;
+  
 }
-
 
 ?>
 

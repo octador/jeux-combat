@@ -6,15 +6,13 @@ class Hero
     //  proprieter du heros
     private $id;
     private string $name;
-    private int $lifePoints;
+    private int $lifePoints = 100;
+    private int $hitHeros;
 
     // recuperé les information de heros venant du tableau
     public function __construct(array $data)
     {
-
-        $this->id = $data['id'];
-        $this->name = $data['heros'];;
-        $this->lifePoints = $data['life_points'];
+        $this->name = $data['heros'];
     }
     // public function HitMonster()
     // {
@@ -39,5 +37,10 @@ class Hero
     }
     public function getlifepoints():string{
         return $this->lifePoints;
+    }
+    public function hitHeros(){
+        // 1: recupere un les points de vie de HitMonster
+        // 2: enlever un nombre de pont alléatoire
+    
     }
 }

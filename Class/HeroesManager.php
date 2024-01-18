@@ -1,57 +1,55 @@
 <?php
-// Définit la classe HeroesManager qui contient tout le CRUD d’un héros :
-
-// Enregistrer un nouveau héros en base de données.
-// Modifier un héros.
-// Sélectionner un héros.
-// Récupérer une liste de plusieurs héros vivants.
-// Savoir si un héros existe.
-
 require_once('./Config/autoload.php');
 require_once('./Config/db.php');
 
 class HeroesManager
 {
     private PDO $db;
-    private array $herosArray;
-    private array $checkArrayHero;
+    private array $herosObjectArray = [];
 
     public function __construct($db)
     {
         $this->db = $db;
     }
     // check if exist
-    public function checkHeros($newPerso): void
+    public function checkHeros(Hero $newPerso) : array
     {
-        $request = $this->db->query("SELECT * FROM heros");
+        $request = $this->db->prepare("SELECT * FROM heros WHERE heros = :heros");
+        $request->execute([
+            'heros' => $newPerso->getName()
+        ]);
+
         $herosArrays = $request->fetchAll();
+        // var_dump($herosArrays);
 
-        // Parcourir tous les héros $herosArrays
-        foreach ($herosArrays as $herosArray) {
-
-            // Comparer avec $newPerso
-            if ($herosArray['heros'] == $newPerso) {
-                // $this->herosArray = ;
-                $newHeros = new Hero($herosArray);
-                var_dump($herosArray);
-
-                // hero->setName($newPerso);
-                echo 'rooooo';
-                return;
-            }
+        if(!$herosArrays) {
+            // var_dump($herosArrays);
+            $this->addHeros($newPerso);
         }
 
-        // Si la boucle se termine sans trouver de correspondance, ajouter le nouveau héros
-        $this->addHeros($newPerso);
+        // var_dump($this->herosObjectArray);
+        return $this->herosObjectArray;
     }
 
     // add Heros in $db
-    public function addHeros($newPerso): void
+    public function addHeros(Hero $newPerso): void
     {
         $request = $this->db->prepare("INSERT INTO heros(heros) VALUES (:heros)");
         $request->execute([
-            'heros' => $newPerso
+            'heros' => $newPerso->getName()
         ]);
-        var_dump($newPerso);
+
+        $id = $this->db->lastInsertId();
+        $newPerso->setId($id);
+    
+        // var_dump($herosArray);
+        $this->herosObjectArray[] = $newPerso;
+    }
+
+    // afficher tout les heros qui son en vie
+    public function findAllAlive(){
+        $request = $this->db->query("SELECT * FROM heros WHERE heros.life_points > 0 ");
+        $result = $request->fetchAll();
+        return $result;
     }
 }

@@ -7,11 +7,12 @@ class Hero
     private $id;
     private string $name;
     private int $lifePoints = 100;
-    private int $hitHeros;
+    // private int $hitHeros;
 
     // recuperé les information de heros venant du tableau
     public function __construct(array $data)
-    {
+    { 
+        $this->id = $data['id'];
         $this->name = $data['heros'];
     }
     // public function HitMonster()
@@ -38,10 +39,10 @@ class Hero
     public function getlifepoints():string{
         return $this->lifePoints;
     }
-    // public function hitHeros($name){
-    //     // 1: recupere  les points de vie de HitMonster
-    //     // 2: enlever un nombre de pont alléatoire
-    //     $newmonster->getName();
-    
-    // }
+    public function hit($got)
+    {
+        $hitAleatoire = $got->getLifePoints() - rand(5,30);
+        $got->setLifePoints($hitAleatoire);
+        return  $got->getLifePoints();
+    }
 }

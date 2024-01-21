@@ -2,27 +2,36 @@
 require_once('./Config/db.php');
 require_once('./Config/autoload.php');
 
-class FighttsManager{
-// recuperé les property du heros
-private object $herosFigth;
-// recuperé les property du monster
-private object $monsterFigth;
-// recupérée le héros et le monstre
-public function __construct($herosFigth,$monsterFigth)
+class FightsManager
 {
-    $this->herosFigth = $herosFigth;
-    $this->monsterFigth = $monsterFigth;
+    private PDO $db;
+
+    public function createMonster()
+    {
+        $newMonster = new Monster;
+        $newMonster->setName('Monsieur Peabody');
+        return $newMonster;
+    }
+
+    public function fight($hero, $monster)
+    {
+        $damages = ['hero' => [], 'monster' => []];
+
+        while ($hero->getLifePoints() > 0 && $monster->getLifePoints() > 0) {
+
+            if ($hero->getLifePoints() > 0) {
+                $damage = $hero->hit($monster);
+                $monster->setLifePoints($damage);
+                $damages['monster'][] = intval($damage);
+            }
+
+            if ($monster->getLifePoints() > 0) {
+                $damage = $monster->hit($hero);
+                $hero->setLifePoints($damage);
+                $damages['hero'][] = intval($damage);
+            }
+        }
+
+        return $damages;
+    }
 }
-
-
-
-}
-
-
-
-
-
-
-
-
-?>

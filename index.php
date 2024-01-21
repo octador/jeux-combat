@@ -3,27 +3,27 @@
 require_once('./Config/autoload.php');
 require_once('./Config/db.php');
 
+$newHeros = new HeroesManager($db);
 if (isset($_POST) && !empty($_POST)) {
 
     $newPerso = $_POST['name'];
 
-    $newHeros = new HeroesManager($db);
     $hero = new Hero(['heros' => $newPerso]);
 
     $newHeros->checkHeros($hero);
 
-    $newmonster = new Monster('Big King');
+
     //    echo $newmonster->getpointLifeMonster();
     //    var_dump($newHeros->findAllAlive()) ;
 
 }
+// var_dump($newHeros->findAllAlive());
 $results = $newHeros->findAllAlive();
-
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -39,22 +39,26 @@ $results = $newHeros->findAllAlive();
         <input type="text" name="name">
         <button type="submit">GO</button>
     </form>
+
     <div class="d-flex flex-wrap container justify-content-center gap-3">
-      
+
         <?php
         foreach ($results as $result) { ?>
-            <form action="" method="post">
+            <form action="./fight.php" method="post">
                 <div class="card" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h3 class="card-title"><?php echo $result['heros'] ?></h3>
-                        <h4><?php echo $result['life_points'] . "Points" ?></h4>
-                        <button type="submit" class="btn btn-primary">choisir
+                        <h3 class="card-title"><?php echo $result->getname() ?></h3>
+                        <h4><?php echo $result->getlifepoints() . "Points" ?></h4>
+
+                        <input type="hidden" value="<?php echo $result->getId() ?>"name = 'id' >
+                        <button type="submit" class="btn btn-primary">COMBATRE
                         </button>
+
                     </div>
                 </div>
-            </form>
 
+            </form>
         <?php }
         ?>
     </div>

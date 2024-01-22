@@ -16,13 +16,14 @@ $monster = $FightsManager->createMonster();
 var_dump($monster);
 var_dump($hero);
 
-  $figthArrays[] = $FightsManager->fight($hero,$monster);
+  $figthArrays= $FightsManager->fight($hero,$monster);
   var_dump($figthArrays);
-  echo 'point de vie du hero : ' .$hero->getlifepoints().'<br>';
-  echo 'point de vie du monstre : '. $monster->getlifepoints();
+  // echo 'point de vie du hero : ' .$hero->getlifepoints().'<br>';
+  // echo 'point de vie du monstre : '. $monster->getlifepoints();
 
   foreach ($figthArrays as $figthArray) {
-   var_dump($figthArray);
+ echo $figthArray .'<br>';
+   
   }
   
 // var_dump($figthArrays);

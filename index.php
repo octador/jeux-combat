@@ -12,12 +12,7 @@ if (isset($_POST) && !empty($_POST)) {
 
     $newHeros->checkHeros($hero);
 
-
-    //    echo $newmonster->getpointLifeMonster();
-    //    var_dump($newHeros->findAllAlive()) ;
-
 }
-// var_dump($newHeros->findAllAlive());
 $results = $newHeros->findAllAlive();
 ?>
 

@@ -35,15 +35,16 @@ class HeroesManager
     // add Heros in $db
     public function addHeros(Hero $newPerso): void
     {
-        $request = $this->db->prepare("INSERT INTO heros(heros) VALUES (:heros)");
+        $request = $this->db->prepare("INSERT INTO heros(heros, image) VALUES (:heros,:image)");
         $request->execute([
+            'image' => $newPerso->getImage(),
             'heros' => $newPerso->getName()
         ]);
 
         $id = $this->db->lastInsertId();
         $newPerso->setId($id);
 
-        
+
         $this->herosObjectArray[] = $newPerso;
     }
 
@@ -62,29 +63,44 @@ class HeroesManager
             $hero->setLifePoints($result['life_points']);
 
             $herosLifeResult[] = $hero;
-            
         }
         return $herosLifeResult;
     }
 
     public function find($selectId)
     {
-        var_dump($selectId);
+
         $request = $this->db->prepare("SELECT *FROM heros WHERE id = :id");
         $request->execute([
             ':id' => $selectId
         ]);
-        $findArray = $request->fetch(); 
-        var_dump($findArray);
+        $findArray = $request->fetch();
+
 
         $hero = new Hero($findArray);
-       var_dump($hero);
+        var_dump($findArray);
+        $hero->setLifePoints($findArray['life_points']);
+        $hero->setId($findArray['id']);
         return $hero;
     }
-    // public function update(Hero $hero){
-    //     var_dump($hero);
-    //    $sql = ("UPDATE `heros` SET `life_points`=10 WHERE heros.id = :life_points");
-    //    $statement = $this->db->prepare($sql);
-    //    $statement->execute(['life_points'=>$hero->getlifepoints()]);
-    // }
+    public function update(Hero $hero)
+    {
+
+        $sql = ("UPDATE `heros` SET `life_points`= :life_points WHERE heros.id = :id");
+        $statement = $this->db->prepare($sql);
+        $statement->execute([
+            ':life_points' => $hero->getlifepoints(),
+            ':id' => $hero->getId()
+        ]);
+    }
+    public function deleteHeros(Hero $hero)
+    {
+        $sql = "DELETE FROM heros WHERE id = :id";
+
+        $statement = $this->db->prepare($sql);
+
+        $statement->execute([
+            ':id' => $hero->getId()
+        ]);
+    }
 }

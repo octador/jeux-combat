@@ -14,38 +14,33 @@ class FightsManager
     }
 
     public function fight($hero, $monster)
-{
-    $figthArrays = [];
-
-    while ($hero->getLifePoints() > 0 and $monster->getLifePoints() > 0) 
     {
-    
-        
-        $damageToMonster = intval($hero->hit($monster));
+        $figthArrays = [];
 
-        if ($damageToMonster > 0) {
-            $figthArrays[] ='il reste : '. $damageToMonster.' pts au monster';
-        }
-        
-        if ($monster->getLifePoints() < 0 or $hero->getLifePoints() < 0) {
-            break; 
-        }
-        
-        $damageToHero = intval($monster->hit($hero));
+        while ($hero->getLifePoints() > 0 and $monster->getLifePoints() > 0) {
 
-        if ($damageToHero > 0) {
-            $figthArrays[] = 'il reste : '. $damageToHero.' pts au hero ';
+
+            $damageToMonster = intval($hero->hit($monster));
+
+            if ($damageToMonster > 0) {
+                $figthArrays[] = 'il reste : ' . $damageToMonster . ' pts au monster';
+            }
+
+            if ($monster->getLifePoints() < 0 or $hero->getLifePoints() < 0) {
+                break;
+            }
+
+            $damageToHero = intval($monster->hit($hero));
+
+            if ($damageToHero > 0) {
+                $figthArrays[] = 'il reste : ' . $damageToHero . ' pts au hero ';
+            }
+
+            if ($hero->getLifePoints() < 0 or $monster->getLifePoints() < 0) {
+                break;
+            }
         }
-        
-        if ($hero->getLifePoints() < 0 or $monster->getLifePoints() < 0 ) {
-            break; 
-        }
+
+        return $figthArrays;
     }
-
-    return $figthArrays;
 }
-
-    
-}
-?>
-

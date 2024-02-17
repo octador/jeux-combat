@@ -1,0 +1,18 @@
+body{
+    background-image: url(./Style/image/yunayi0.png);
+}
+.roud{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.figth{
+    background-color: aliceblue;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}

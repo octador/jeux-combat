@@ -1,10 +1,15 @@
+
 .backgroundbody{
     background-image: url(./image/yunayi0.png);
     background-size: cover;
     background-repeat: no-repeat;
 
 }
-
+#backgroundfigth{
+    background-image: url(./image/yunayi0.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .main-section {
     display: flex;
     min-height: 100vh;
@@ -83,3 +88,7 @@
     .input-file + .label-file:hover {
         background-color: rgb(100, 3, 3);
     } */
+.figth{
+    background-color: #fff;
+    display: flex;
+}

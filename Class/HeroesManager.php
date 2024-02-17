@@ -78,7 +78,7 @@ class HeroesManager
 
 
         $hero = new Hero($findArray);
-        var_dump($findArray);
+       
         $hero->setLifePoints($findArray['life_points']);
         $hero->setId($findArray['id']);
         return $hero;

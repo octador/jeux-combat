@@ -50,8 +50,7 @@ if ($hero->getlifepoints() <= 0) {
         }
         ?>
 
-        <a href="./Index.php"><button type="button" class="btn btn-link">Retour</button>
-        </a>
+<a href="./index.php"><button type="button" class="btn btn-link">Retour</button>
       </div>
 
 

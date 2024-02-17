@@ -57,7 +57,7 @@ class HeroesManager
         $herosLifeResult = [];
 
         foreach ($results as $result) {
-            $hero = new hero($result);
+            $hero = new Hero($result);
             $hero->setid($result['id']);
             $hero->setName($result['heros']);
             $hero->setLifePoints($result['life_points']);
